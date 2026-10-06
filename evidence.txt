@@ -1,3 +1,5 @@
+Base URL: http://localhost:8787/api
+
 === 1. Valid POST (expect 201) 
 HTTP/1.1 201 Created
 Content-Length: 243
