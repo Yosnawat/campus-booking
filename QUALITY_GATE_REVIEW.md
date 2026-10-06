@@ -28,4 +28,4 @@
 
 ## Submission decision
 
-READY (to be confirmed after the final Quality Gate check)
+READY 
