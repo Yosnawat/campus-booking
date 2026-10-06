@@ -16,12 +16,15 @@ All AI use is recorded below. Where I list "Verified myself", I ran the check on
 | 7 | Reviewed my results against the Quality Gate and curl test guide. | Extra evidence cases (GET lists, full-payload PATCH, unknown route, DELETE/PATCH on missing id, empty PATCH, equipment filter). | Ran cases 1-23 and recorded them in `evidence.txt`. |
 | 8 | Debugging: PATCH/GET returned 404 in the server log. | The id I copied had extra text (`,equipmentId`) after it. I should copy only the characters from `bk-` to the closing quote. | Saw `,equipmentId` in the server log URL, reset `.wrangler\state`, reloaded the schema, and re-ran all cases from case 1 with the correct id. |
 | 9 | Drafted `QUALITY_GATE_REVIEW.md`, `README.md`, and `API_CONTRACT.md`. | The structure and wording. I changed wording so each Quality Gate row says "I checked..." instead of claiming bugs I did not hit. | Compared the documents with `evidence.txt` (error messages, status codes, field names, case numbers). |
+| 10 | Asked how to deploy to Cloudflare Workers + D1 and test it there, saving the output to a log file. | Steps: `wrangler login`, `d1 create`, set `database_id` in `wrangler.toml`, `d1 execute --remote`, `wrangler deploy`, and the curl commands that append to `evidence_cloud.txt`. | Ran every command myself. Checked `SELECT * FROM equipment` on the remote database and the deploy output for the Worker URL. |
+| 11 | Debugging: every cloud test returned `404 Route not found`. | Cause: the Base URL had no `https://` and no `/api` (the code uses `basePath('/api')`). Also: delete the old log first because `>>` appends, and quote `set "BASE=..."` to avoid a trailing space. Added case C7 (`startAt: "abc"`) and C8 (list). | Re-ran with the corrected Base URL. C1-C8 returned 200 / 201 / 409 / 400 / 404 / 404 / 400 / 200 in the new `evidence_cloud.txt`. I confirmed C8 shows the booking created in C2. |
+| 12 | Asked AI to review my files (documents, code, and both evidence files) against the exam brief, rubric, and Quality Gate. | Suggestions to add a minute-30 snapshot, add a cloud row to the Quality Gate review, and note the 404-vs-400 choice for unknown `equipmentId`. | Compared the suggestions with the rubric myself and updated `README.md`, `QUALITY_GATE_REVIEW.md`, and this log. |
 
 ## What AI wrote and what I did
 
 - **AI-written, then run and tested by me:** the code in `src/index.ts`, `schema.sql`, `wrangler.toml`.
 - **AI-drafted, then edited and checked by me:** `README.md`, `API_CONTRACT.md`, `QUALITY_GATE_REVIEW.md`, `AI_LOG.md`.
-- **Done by me:** running all commands, running all curl test cases, reading the server logs, resetting the database, finding and fixing the wrong-id mistake, committing to git.
+- **Done by me:** running all commands, running all curl test cases (local and cloud), reading the server logs, resetting the database, finding and fixing the wrong-id mistake, deploying to Cloudflare, fixing the cloud Base URL and re-running the cloud tests, committing to git.
 - **Code I reviewed and can explain:** `validate` (checks every field and the date order), `overlap` (the SQL overlap query), the PATCH merge (stored values + patch, then validate), and `readBody` (try/catch that returns 400 for bad JSON).
 
 ## What I did not take from AI as-is

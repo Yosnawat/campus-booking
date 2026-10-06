@@ -1,74 +1,105 @@
-Base URL: campus-booking.my-taskflow.workers.dev 
-=== C1. GET equipment (expect 200) 
-HTTP/1.1 404 Not Found
-Date: Tue, 06 Oct 2026 07:35:03 GMT
+Base URL: https://campus-booking.my-taskflow.workers.dev/api
+=== C1. GET equipment (expect 200)
+HTTP/1.1 200 OK
+Date: Tue, 06 Oct 2026 08:28:42 GMT
 Content-Type: application/json
-Content-Length: 27
+Content-Length: 186
 Connection: keep-alive
-Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=7tekGpgZrhOqFeko7eLTI8rd4NkWYbTdH%2B%2BzCDkb%2BCp42ZEfwvGxvLSchVUVpyACDHgrAL9pUKeond1ibXv89rnZcOvmp9EQTvjTRIl73tWkXUcAnQdC1gg5doHKVZLbIsJ15odaWGOqYCoEak506OmRhAqoc2gKYw%3D%3D"}]}
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=bk18wo2d8jSqvRz2dWLd5govZFafzQEZ%2Fi0PLdbTMJtlma76ofMVPyk2sExz6rHu6bCrgnins077wYD2TSTCEyk3ELU9B%2BgZLWN6R5KR4b%2Bg%2B4EXvS%2B53MHlBIhHOQkUBWzOBmaTIlcR3uMOgZxisSJSM3UjLibrsA%3D%3D"}]}
 Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
 Server: cloudflare
-CF-RAY: a462fcb5c92c3e31-SIN
+CF-RAY: a4634b4d1ad40ad8-SIN
 alt-svc: h3=":443"; ma=86400
 
-{"error":"Route not found"}=== C2. Valid POST (expect 201) 
-HTTP/1.1 404 Not Found
-Date: Tue, 06 Oct 2026 07:35:03 GMT
+[{"id":"eq-1","name":"Projector A","location":"Building 1"},{"id":"eq-2","name":"Camera Canon R6","location":"Media Lab"},{"id":"eq-3","name":"Meeting Room 201","location":"Building 2"}]
+=== C2. Valid POST (expect 201)
+HTTP/1.1 201 Created
+Date: Tue, 06 Oct 2026 08:28:42 GMT
 Content-Type: application/json
-Content-Length: 27
+Content-Length: 243
 Connection: keep-alive
-Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=DS3c3dnYNGeUF5AYjCqGbk77u2z4VLdbgXcCoobtl5jCmUPl0IwcdRoDKkgCTzMLx6RrKKoEkjeYbqfossWGLje7guOCtfxPf6zFaFNw1rQoIc19DoVoUShPtrkF4u5%2FYnYacF%2BFhqm4ZJn3gSqr%2FyGcyW92EIZckA%3D%3D"}]}
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=l%2FMlMyXIg78ibnFCSFdiQhmKs2nH%2B6cZpYKeIM1KEUTio9a8auLDdTqszJ5MFtWAM8lmRFBd214kQ2Mt1u4JF9KcugQ9DMfSD7topQg1gNbyI6F7D1qHIv7vtT7eccVLNoxnpNxr5puTn0vw0ezVDit7Y%2FYdlUm0Qw%3D%3D"}]}
 Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
 Server: cloudflare
-CF-RAY: a462fcb83cb55fe7-SIN
+CF-RAY: a4634b4e9a0b5fba-SIN
 alt-svc: h3=":443"; ma=86400
 
-{"error":"Route not found"}=== C3. Overlap (expect 409) 
-HTTP/1.1 404 Not Found
-Date: Tue, 06 Oct 2026 07:35:04 GMT
+{"id":"bk-26b2f0bd-c2e8-451b-a63a-9fe516869491","equipmentId":"eq-1","borrowerName":"Somchai Jaidee","startAt":"2026-10-20T09:00:00.000Z","endAt":"2026-10-20T11:00:00.000Z","purpose":"Class presentation","createdAt":"2026-10-06T08:28:42.712Z"}
+=== C3. Overlap (expect 409)
+HTTP/1.1 409 Conflict
+Date: Tue, 06 Oct 2026 08:28:43 GMT
 Content-Type: application/json
-Content-Length: 27
+Content-Length: 58
 Connection: keep-alive
-Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=n9bylZUxwCyVHo2b8NSID2a9OlsEV2Pz8JDXgBRn%2BgASahrFJSDLRJDqL%2Bjv1WtG3slmcY5uRGUp6ffI%2BMoW8IZO%2FWie8VJaPE0JfxDOgd8cU3z6b9ZMEqFLk0D%2BRyQXbDc1I64qq5zcE%2B13QZnPJcqZ532iBB1Xng%3D%3D"}]}
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=uglfv%2B8sFJpIEDHs0jAWxdNaxdhFyqjSYgqGP8o%2BeSNiwHCUr16Gp03R3%2BgSg3Ub26mL00Opg6NVSmLaRmke6kgwWB%2FOvqhXk%2Belo%2FWRqOyeED3zN7CfIOwm30Bhvz8wYy6d5HWJ5qrmqjfxH7R2yqWuC8CvSNcCJA%3D%3D"}]}
 Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
 Server: cloudflare
-CF-RAY: a462fcbaae761bd5-SIN
+CF-RAY: a4634b507877ce2a-SIN
 alt-svc: h3=":443"; ma=86400
 
-{"error":"Route not found"}=== C4. start after end (expect 400) 
-HTTP/1.1 404 Not Found
-Date: Tue, 06 Oct 2026 07:35:04 GMT
+{"error":"Equipment is already booked in that time range"}
+=== C4. start after end (expect 400)
+HTTP/1.1 400 Bad Request
+Date: Tue, 06 Oct 2026 08:28:43 GMT
 Content-Type: application/json
-Content-Length: 27
+Content-Length: 40
 Connection: keep-alive
-Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ncl9uJwfP9k%2FNa7m0Nzi8vG2D70SXYHJXYOCu7KHzconxccqKKFMX3JfY3AWx98LrGFxBEXaIZoLxRsSinWGVFvM4u0s5Gr5p83CLXyOrnQDC4MzWqbBe6uiRAT2Xhunk5Yq1wS3V11Sx3tgWGBl3vJjdnbXutnfiA%3D%3D"}]}
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=6zg9WP6xNdRLCwuG6ILOO1XHtsGOqEVgyp9ogL%2FUhBHnw2iEM1pAYhjtNbhce8m5dd8VSc%2BoSDkH4g%2FGsKGgK9D5jctXYI43Ltpuy4qkPiCy2oxRGiQJU52c4VK%2F%2FRy%2Fysf8cNnXxUM6svjXXUDCizNjMtx8nxcwdg%3D%3D"}]}
 Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
 Server: cloudflare
-CF-RAY: a462fcbcdbd0fd2c-SIN
+CF-RAY: a4634b523e4deba0-SIN
 alt-svc: h3=":443"; ma=86400
 
-{"error":"Route not found"}=== C5. Unknown equipment (expect 404) 
+{"error":"startAt must be before endAt"}
+=== C5. Unknown equipment (expect 404)
 HTTP/1.1 404 Not Found
-Date: Tue, 06 Oct 2026 07:35:04 GMT
+Date: Tue, 06 Oct 2026 08:28:43 GMT
 Content-Type: application/json
-Content-Length: 27
+Content-Length: 39
 Connection: keep-alive
-Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=oWZsS%2F4SocPa8E%2B8uOTZ7Yz20s%2BuHe4t9RiDagTzwwV7gsYhLcB1zzOsECJ9bJzpsTFfPFWKWy7DOLamNmU9XlFNti4vMOhsoW6CDU5vbinqb%2F%2FzdIEfADEKWLlBTh8BBl%2BxYlrhJiiML8lXb4RWVWoH0rfDc5y8Gg%3D%3D"}]}
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=3SJVfzyz3dY3cY%2FcE6%2FD6RhiEs7M3NnFtHXcccdw4TrAx2M2DrOFwsfsnq%2BeqkVzUAQ559%2F9%2FZECTAWGi7wwWuyHM20uSrT%2FJARVQHauByVoVSIsHnsS3a0G8il5O4vGDXRP5XyYFmr8OP4WI71EQF8SOXNn8FpcsQ%3D%3D"}]}
 Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
 Server: cloudflare
-CF-RAY: a462fcbf0b8bfdc2-SIN
+CF-RAY: a4634b541a0b7be4-HKG
 alt-svc: h3=":443"; ma=86400
 
-{"error":"Route not found"}=== C6. GET missing booking (expect 404) 
+{"error":"Equipment 'eq-99' not found"}
+=== C6. GET missing booking (expect 404)
 HTTP/1.1 404 Not Found
-Date: Tue, 06 Oct 2026 07:35:07 GMT
+Date: Tue, 06 Oct 2026 08:28:43 GMT
 Content-Type: application/json
-Content-Length: 27
+Content-Length: 29
 Connection: keep-alive
-Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=E4n3c3HvzlWYfKOQots6ToJ356XLnjlnR90Nl6uGsKLBM%2FofKJSfVcip6FqFQMypboeYFAS4CygIVKKl6QWREKyj9m9axY1q0AfRgO4vMtpGEb6we7Ro8fa5C2%2BGmGsuc9dFwxzKZz29oO0F%2BECoAkBdOSs1aTP9kg%3D%3D"}]}
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=7xUJItyShDKvv7kB5IvmXEUmC1fKnAtmbJ5HUEFq15ytEglSnhQFBG8QhPxQjC2Z%2FXn2E1d1u6GKZAvfv2UOH0JwmmeQZYtWyYAXk2zua3MGiwEVt9%2FazYaVdVtAGioO%2FRLEonI2MoPsj26LauZZqAO3ZlgbmIoCzA%3D%3D"}]}
 Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
 Server: cloudflare
-CF-RAY: a462fcd0f80f45c8-SIN
+CF-RAY: a4634b564d91fdb8-SIN
 alt-svc: h3=":443"; ma=86400
 
-{"error":"Route not found"}
+{"error":"Booking not found"}
+=== C7. Invalid date (expect 400)
+HTTP/1.1 400 Bad Request
+Date: Tue, 06 Oct 2026 08:28:44 GMT
+Content-Type: application/json
+Content-Length: 49
+Connection: keep-alive
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=JoPMgMDwpk75DLHcrAbo%2Fs0lwFDAN8uFbm3XnaMeGYUdhrOt0vPxxX%2BzGH%2BzpHjko0gqWy2bWz40LKk%2Fk2bgZctpmleYJNpXdn0Whk9zlTNU47wyz5BYWCXdfqL6uGH7tuftrEWiMWhHtrVCC7VWA0emb5kfPCTdLQ%3D%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Server: cloudflare
+CF-RAY: a4634b58ccebe353-NRT
+alt-svc: h3=":443"; ma=86400
+
+{"error":"startAt must be a valid ISO-8601 date"}
+=== C8. List bookings (expect 200)
+HTTP/1.1 200 OK
+Date: Tue, 06 Oct 2026 08:28:44 GMT
+Content-Type: application/json
+Content-Length: 245
+Connection: keep-alive
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=86I5hnwsK%2Fn%2F29%2FSO6UZPWkHFghgnvToeBVRc%2Fbs7UpgqOyhQwPSLgsVb4hrN9zUJ6swmTm8z64bHLpEEsTUY6G6j8y9oreXkOBkQhHQePMFY59ysd45pnHeOZyhhse0388kwjsSR8rn1P%2FAcz2S%2BnT0KJVXuuy%2BGA%3D%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Server: cloudflare
+CF-RAY: a4634b5b5ab4ded5-NRT
+alt-svc: h3=":443"; ma=86400
+
+[{"id":"bk-26b2f0bd-c2e8-451b-a63a-9fe516869491","equipmentId":"eq-1","borrowerName":"Somchai Jaidee","startAt":"2026-10-20T09:00:00.000Z","endAt":"2026-10-20T11:00:00.000Z","purpose":"Class presentation","createdAt":"2026-10-06T08:28:42.712Z"}]

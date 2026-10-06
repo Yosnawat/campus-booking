@@ -6,9 +6,19 @@ A small REST API for reserving shared equipment (projectors, cameras, meeting ro
 
 ## Base URL used for testing
 
+Local (`npx wrangler dev`):
+
 ```
 http://localhost:8787/api
 ```
+
+Cloud (Cloudflare Workers + remote D1):
+
+```
+https://campus-booking.my-taskflow.workers.dev/api
+```
+
+All routes are under `/api`. A request without `/api` returns `404 {"error":"Route not found"}`.
 
 ## How to run
 
@@ -26,6 +36,22 @@ npx wrangler dev
 
 To reset the data: stop the server, delete the `.wrangler\state` folder, and run the `d1 execute` command again.
 
+### Deploy to Cloudflare (optional)
+
+```cmd
+npx wrangler login
+npx wrangler d1 create campus-db
+```
+
+Put the returned `database_id` in `wrangler.toml` (keep `binding = "DB"`), then:
+
+```cmd
+npx wrangler d1 execute campus-db --remote --file=schema.sql
+npx wrangler deploy
+```
+
+The local `wrangler dev` setup above is enough to run and mark the project. The cloud deployment is an extra.
+
 ## Project files
 
 | File | Purpose |
@@ -36,7 +62,8 @@ To reset the data: stop the server, delete the `.wrangler\state` folder, and run
 | `API_CONTRACT.md` | Endpoints, payloads, status codes, error format |
 | `AI_LOG.md` | Record of AI assistance |
 | `QUALITY_GATE_REVIEW.md` | Quality Gate findings |
-| `evidence.txt` | curl test output (cases 1-23, base URL on the first line) |
+| `evidence.txt` | curl test output against the local server (cases 1-23, base URL on the first line) |
+| `evidence_cloud.txt` | curl test output against the Cloudflare deployment (cases C1-C8, base URL on the first line) |
 
 ## Assumptions
 
@@ -96,7 +123,12 @@ Full details are in [API_CONTRACT.md](API_CONTRACT.md).
 
 ## Testing
 
-Tested with `curl` in Windows CMD. Results for 23 cases (success and error) are in `evidence.txt`. Example:
+Tested with `curl` in Windows CMD.
+
+- **Local:** 23 cases (success and error) in `evidence.txt`.
+- **Cloud:** 8 cases in `evidence_cloud.txt` (GET equipment, create, overlap 409, start after end 400, unknown equipment 404, missing booking 404, invalid date 400, list bookings). The first cloud attempt returned 404 for every case because the Base URL had no `/api`; it was corrected and re-run (see `QUALITY_GATE_REVIEW.md`).
+
+Example:
 
 ```cmd
 curl -i -X POST http://localhost:8787/api/bookings -H "Content-Type: application/json" -d "{\"equipmentId\":\"eq-1\",\"borrowerName\":\"Somchai Jaidee\",\"startAt\":\"2026-10-20T09:00:00.000Z\",\"endAt\":\"2026-10-20T11:00:00.000Z\",\"purpose\":\"Class presentation\"}"
