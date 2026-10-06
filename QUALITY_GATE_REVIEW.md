@@ -1,7 +1,7 @@
 # Quality Gate Review
 
 - Base URL used for testing: http://localhost:8787/api
-- Test evidence: `evidence.txt` (cases 1-19, run against a freshly reset local D1 database)
+- Test evidence: `evidence.txt` (cases 1-23; cases 1-19 were run against a freshly reset local D1 database, cases 20-23 were run afterwards on the same database)
 
 ## Review record
 
@@ -15,7 +15,7 @@
 
 ## Why each status code
 
-- **400**: the request is invalid (malformed JSON, missing field, bad date, `startAt >= endAt`).
+- **400**: the request is invalid (malformed JSON, missing field, bad date, `startAt >= endAt`, empty PATCH body).
 - **404**: the booking id or the `equipmentId` does not exist, or the route is unknown.
 - **409**: the request is valid but conflicts with an existing booking for the same equipment.
 
