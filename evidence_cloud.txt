@@ -1,0 +1,74 @@
+Base URL: campus-booking.my-taskflow.workers.dev 
+=== C1. GET equipment (expect 200) 
+HTTP/1.1 404 Not Found
+Date: Tue, 06 Oct 2026 07:35:03 GMT
+Content-Type: application/json
+Content-Length: 27
+Connection: keep-alive
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=7tekGpgZrhOqFeko7eLTI8rd4NkWYbTdH%2B%2BzCDkb%2BCp42ZEfwvGxvLSchVUVpyACDHgrAL9pUKeond1ibXv89rnZcOvmp9EQTvjTRIl73tWkXUcAnQdC1gg5doHKVZLbIsJ15odaWGOqYCoEak506OmRhAqoc2gKYw%3D%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Server: cloudflare
+CF-RAY: a462fcb5c92c3e31-SIN
+alt-svc: h3=":443"; ma=86400
+
+{"error":"Route not found"}=== C2. Valid POST (expect 201) 
+HTTP/1.1 404 Not Found
+Date: Tue, 06 Oct 2026 07:35:03 GMT
+Content-Type: application/json
+Content-Length: 27
+Connection: keep-alive
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=DS3c3dnYNGeUF5AYjCqGbk77u2z4VLdbgXcCoobtl5jCmUPl0IwcdRoDKkgCTzMLx6RrKKoEkjeYbqfossWGLje7guOCtfxPf6zFaFNw1rQoIc19DoVoUShPtrkF4u5%2FYnYacF%2BFhqm4ZJn3gSqr%2FyGcyW92EIZckA%3D%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Server: cloudflare
+CF-RAY: a462fcb83cb55fe7-SIN
+alt-svc: h3=":443"; ma=86400
+
+{"error":"Route not found"}=== C3. Overlap (expect 409) 
+HTTP/1.1 404 Not Found
+Date: Tue, 06 Oct 2026 07:35:04 GMT
+Content-Type: application/json
+Content-Length: 27
+Connection: keep-alive
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=n9bylZUxwCyVHo2b8NSID2a9OlsEV2Pz8JDXgBRn%2BgASahrFJSDLRJDqL%2Bjv1WtG3slmcY5uRGUp6ffI%2BMoW8IZO%2FWie8VJaPE0JfxDOgd8cU3z6b9ZMEqFLk0D%2BRyQXbDc1I64qq5zcE%2B13QZnPJcqZ532iBB1Xng%3D%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Server: cloudflare
+CF-RAY: a462fcbaae761bd5-SIN
+alt-svc: h3=":443"; ma=86400
+
+{"error":"Route not found"}=== C4. start after end (expect 400) 
+HTTP/1.1 404 Not Found
+Date: Tue, 06 Oct 2026 07:35:04 GMT
+Content-Type: application/json
+Content-Length: 27
+Connection: keep-alive
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ncl9uJwfP9k%2FNa7m0Nzi8vG2D70SXYHJXYOCu7KHzconxccqKKFMX3JfY3AWx98LrGFxBEXaIZoLxRsSinWGVFvM4u0s5Gr5p83CLXyOrnQDC4MzWqbBe6uiRAT2Xhunk5Yq1wS3V11Sx3tgWGBl3vJjdnbXutnfiA%3D%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Server: cloudflare
+CF-RAY: a462fcbcdbd0fd2c-SIN
+alt-svc: h3=":443"; ma=86400
+
+{"error":"Route not found"}=== C5. Unknown equipment (expect 404) 
+HTTP/1.1 404 Not Found
+Date: Tue, 06 Oct 2026 07:35:04 GMT
+Content-Type: application/json
+Content-Length: 27
+Connection: keep-alive
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=oWZsS%2F4SocPa8E%2B8uOTZ7Yz20s%2BuHe4t9RiDagTzwwV7gsYhLcB1zzOsECJ9bJzpsTFfPFWKWy7DOLamNmU9XlFNti4vMOhsoW6CDU5vbinqb%2F%2FzdIEfADEKWLlBTh8BBl%2BxYlrhJiiML8lXb4RWVWoH0rfDc5y8Gg%3D%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Server: cloudflare
+CF-RAY: a462fcbf0b8bfdc2-SIN
+alt-svc: h3=":443"; ma=86400
+
+{"error":"Route not found"}=== C6. GET missing booking (expect 404) 
+HTTP/1.1 404 Not Found
+Date: Tue, 06 Oct 2026 07:35:07 GMT
+Content-Type: application/json
+Content-Length: 27
+Connection: keep-alive
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=E4n3c3HvzlWYfKOQots6ToJ356XLnjlnR90Nl6uGsKLBM%2FofKJSfVcip6FqFQMypboeYFAS4CygIVKKl6QWREKyj9m9axY1q0AfRgO4vMtpGEb6we7Ro8fa5C2%2BGmGsuc9dFwxzKZz29oO0F%2BECoAkBdOSs1aTP9kg%3D%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Server: cloudflare
+CF-RAY: a462fcd0f80f45c8-SIN
+alt-svc: h3=":443"; ma=86400
+
+{"error":"Route not found"}
