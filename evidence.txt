@@ -3,7 +3,7 @@ HTTP/1.1 201 Created
 Content-Length: 243
 Content-Type: application/json
 
-{"id":"bk-87252a33-7a9e-4f88-8d95-f34b2698593e","equipmentId":"eq-1","borrowerName":"Somchai Jaidee","startAt":"2026-10-20T09:00:00.000Z","endAt":"2026-10-20T11:00:00.000Z","purpose":"Class presentation","createdAt":"2026-10-06T06:48:29.742Z"}=== 2. Overlap (expect 409) 
+{"id":"bk-6c6bdbd5-d830-44be-8a60-fd80091bde1c","equipmentId":"eq-1","borrowerName":"Somchai Jaidee","startAt":"2026-10-20T09:00:00.000Z","endAt":"2026-10-20T11:00:00.000Z","purpose":"Class presentation","createdAt":"2026-10-06T07:03:26.734Z"}=== 2. Overlap (expect 409) 
 HTTP/1.1 409 Conflict
 Content-Length: 58
 Content-Type: application/json
@@ -13,7 +13,7 @@ HTTP/1.1 201 Created
 Content-Length: 216
 Content-Type: application/json
 
-{"id":"bk-7971634f-4def-4c11-a314-7bc5f2e9a78e","equipmentId":"eq-1","borrowerName":"Nid","startAt":"2026-10-20T11:00:00.000Z","endAt":"2026-10-20T12:00:00.000Z","purpose":null,"createdAt":"2026-10-06T06:49:18.579Z"}=== 4. start after end (expect 400) 
+{"id":"bk-8b6642d2-cfd7-4435-a6f3-7f4d10db507c","equipmentId":"eq-1","borrowerName":"Nid","startAt":"2026-10-20T11:00:00.000Z","endAt":"2026-10-20T12:00:00.000Z","purpose":null,"createdAt":"2026-10-06T07:04:04.278Z"}=== 4. start after end (expect 400) 
 HTTP/1.1 400 Bad Request
 Content-Length: 40
 Content-Type: application/json
@@ -38,15 +38,55 @@ HTTP/1.1 200 OK
 Content-Length: 240
 Content-Type: application/json
 
-{"id":"bk-87252a33-7a9e-4f88-8d95-f34b2698593e","equipmentId":"eq-1","borrowerName":"Somchai Jaidee","startAt":"2026-10-20T09:00:00.000Z","endAt":"2026-10-20T11:00:00.000Z","purpose":"Updated purpose","createdAt":"2026-10-06T06:48:29.742Z"}=== 9. GET nonexistent (expect 404) 
+{"id":"bk-6c6bdbd5-d830-44be-8a60-fd80091bde1c","equipmentId":"eq-1","borrowerName":"Somchai Jaidee","startAt":"2026-10-20T09:00:00.000Z","endAt":"2026-10-20T11:00:00.000Z","purpose":"Updated purpose","createdAt":"2026-10-06T07:03:26.734Z"}=== 9. PATCH endAt before stored startAt (expect 400) 
+HTTP/1.1 400 Bad Request
+Content-Length: 40
+Content-Type: application/json
+
+{"error":"startAt must be before endAt"}=== 10. Malformed JSON (expect 400) 
+HTTP/1.1 400 Bad Request
+Content-Length: 44
+Content-Type: application/json
+
+{"error":"Body must be a valid JSON object"}=== 11. GET equipment (expect 200) 
+HTTP/1.1 200 OK
+Content-Length: 186
+Content-Type: application/json
+
+[{"id":"eq-1","name":"Projector A","location":"Building 1"},{"id":"eq-2","name":"Camera Canon R6","location":"Media Lab"},{"id":"eq-3","name":"Meeting Room 201","location":"Building 2"}]=== 12. GET bookings list (expect 200) 
+HTTP/1.1 200 OK
+Content-Length: 459
+Content-Type: application/json
+
+[{"id":"bk-6c6bdbd5-d830-44be-8a60-fd80091bde1c","equipmentId":"eq-1","borrowerName":"Somchai Jaidee","startAt":"2026-10-20T09:00:00.000Z","endAt":"2026-10-20T11:00:00.000Z","purpose":"Updated purpose","createdAt":"2026-10-06T07:03:26.734Z"},{"id":"bk-8b6642d2-cfd7-4435-a6f3-7f4d10db507c","equipmentId":"eq-1","borrowerName":"Nid","startAt":"2026-10-20T11:00:00.000Z","endAt":"2026-10-20T12:00:00.000Z","purpose":null,"createdAt":"2026-10-06T07:04:04.278Z"}]=== 13. GET one booking (expect 200) 
+HTTP/1.1 200 OK
+Content-Length: 240
+Content-Type: application/json
+
+{"id":"bk-6c6bdbd5-d830-44be-8a60-fd80091bde1c","equipmentId":"eq-1","borrowerName":"Somchai Jaidee","startAt":"2026-10-20T09:00:00.000Z","endAt":"2026-10-20T11:00:00.000Z","purpose":"Updated purpose","createdAt":"2026-10-06T07:03:26.734Z"}=== 14. PATCH full payload (expect 200) 
+HTTP/1.1 200 OK
+Content-Length: 251
+Content-Type: application/json
+
+{"id":"bk-6c6bdbd5-d830-44be-8a60-fd80091bde1c","equipmentId":"eq-1","borrowerName":"Somchai Jaidee","startAt":"2026-10-20T12:00:00.000Z","endAt":"2026-10-20T14:00:00.000Z","purpose":"Updated class presentation","createdAt":"2026-10-06T07:03:26.734Z"}=== 15. Overlap with updated slot (expect 409) 
+HTTP/1.1 409 Conflict
+Content-Length: 58
+Content-Type: application/json
+
+{"error":"Equipment is already booked in that time range"}=== 16. GET nonexistent (expect 404) 
 HTTP/1.1 404 Not Found
 Content-Length: 29
 Content-Type: application/json
 
-{"error":"Booking not found"}=== 10a. DELETE (expect 204) 
+{"error":"Booking not found"}=== 17. Unknown route (expect 404 JSON) 
+HTTP/1.1 404 Not Found
+Content-Length: 27
+Content-Type: application/json
+
+{"error":"Route not found"}=== 18. DELETE (expect 204) 
 HTTP/1.1 204 No Content
 
-=== 10b. GET after delete (expect 404) 
+=== 19. GET after delete (expect 404) 
 HTTP/1.1 404 Not Found
 Content-Length: 29
 Content-Type: application/json
