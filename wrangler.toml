@@ -1,0 +1,8 @@
+name = "campus-booking"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "campus-db"
+database_id = "local"
