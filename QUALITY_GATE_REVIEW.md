@@ -4,7 +4,7 @@
 - Base URL used for testing (cloud): https://campus-booking.my-taskflow.workers.dev/api
 - Test evidence (local): `evidence.txt` (cases 1-23; cases 1-19 were run against a freshly reset local D1 database, cases 20-23 were run afterwards on the same database)
 - Test evidence (cloud): `evidence_cloud.txt` (cases C1-C8, run on Cloudflare Workers + remote D1)
-- First-version snapshot (before minute 30): I did not save a separate screenshot at minute 30. The earliest verifiable record of the first working version is the first local test in `evidence.txt` (case 1, valid POST -> 201, `createdAt` 2026-10-06T07:03:26Z). The Quality Gate review and the fixes below were made after that first version. I understand a missing separate snapshot may reduce marks for this item.
+- First-version snapshot: the first working version of the API was committed as `aefd1e6` ("First version of booking API") on 2026-10-06 at 13:53 (+0700), before the Quality Gate review. Test evidence was added in `7fe4f2f` (14:07) and the Quality Gate review in `fb9665e` (14:14). Later changes (documents, cloud deployment) are in commits up to `000c35b`.
 
 ## Review record
 
